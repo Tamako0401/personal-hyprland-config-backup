@@ -1,5 +1,5 @@
 -- Open the shell's launcher with a dedicated chord as well as the default Super tap.
-hl.bind("SUPER + Space", hl.dsp.exec_cmd("qs -c ii ipc call search toggle || fuzzel"),
+hl.bind("SUPER + ALT + Space", hl.dsp.exec_cmd("qs -c ii ipc call search toggle || fuzzel"),
     { description = "Shell: Toggle search" })
 
 -- Keep the workspace move chord from the previous configuration.

@@ -124,8 +124,8 @@
             "weather": {
                 "enable": true,
                 "placementStrategy": "free",
-                "x": 400,
-                "y": 100
+                "x": 285.8046875,
+                "y": 127.1640625
             }
         }
     },
@@ -163,13 +163,13 @@
         },
         "topLeftIcon": "spark",
         "utilButtons": {
-            "showColorPicker": false,
+            "showColorPicker": true,
             "showDarkModeToggle": true,
-            "showKeyboardToggle": true,
+            "showKeyboardToggle": false,
             "showMicToggle": false,
             "showPerformanceProfileToggle": false,
-            "showScreenRecord": false,
-            "showScreenSnip": true
+            "showScreenRecord": true,
+            "showScreenSnip": false
         },
         "verbose": true,
         "vertical": false,
@@ -186,7 +186,7 @@
             "numberMap": [
             ],
             "showAppIcons": true,
-            "showNumberDelay": 300,
+            "showNumberDelay": 200,
             "shown": 6,
             "useNerdFont": false
         }
@@ -208,7 +208,7 @@
         },
         "splitButtons": false,
         "superKey": "",
-        "useFnSymbol": false,
+        "useFnSymbol": true,
         "useMacSymbol": false,
         "useMouseSymbol": false
     },
@@ -268,7 +268,7 @@
         },
         "night": {
             "automatic": true,
-            "colorTemperature": 5000,
+            "colorTemperature": 5810,
             "from": "19:00",
             "to": "06:30"
         }

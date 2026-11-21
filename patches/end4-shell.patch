@@ -1,0 +1,633 @@
+--- a/hypr/hyprland/keybinds.lua
++++ b/hypr/hyprland/keybinds.lua
+@@ -20,20 +20,20 @@
+     { ignore_mods = true, transparent = true, release = true })
+ hl.bind("SUPER_R", hl.dsp.global("quickshell:workspaceNumber"),
+     { ignore_mods = true, transparent = true, release = true })
+-hl.bind("SUPER + Tab", hl.dsp.global("quickshell:overviewWorkspacesToggle"), { description = "Shell: Toggle overview" })
++-- hl.bind("SUPER + Tab", hl.dsp.global("quickshell:overviewWorkspacesToggle"), { description = "Shell: Toggle overview" })
+ hl.bind("SUPER + V", hl.dsp.global("quickshell:overviewClipboardToggle"))
+ hl.bind("SUPER + Period", hl.dsp.global("quickshell:overviewEmojiToggle"))
+ hl.bind("SUPER + A", hl.dsp.global("quickshell:sidebarLeftToggle"), { description = "Shell: Toggle left sidebar" })
+-hl.bind("SUPER + ALT + A", hl.dsp.global("quickshell:sidebarLeftToggleDetach"))
+-hl.bind("SUPER + B", hl.dsp.global("quickshell:sidebarLeftToggle"))
+-hl.bind("SUPER + O", hl.dsp.global("quickshell:sidebarLeftToggle"))
++-- hl.bind("SUPER + ALT + A", hl.dsp.global("quickshell:sidebarLeftToggleDetach"))
++-- hl.bind("SUPER + B", hl.dsp.global("quickshell:sidebarLeftToggle"))
++-- hl.bind("SUPER + O", hl.dsp.global("quickshell:sidebarLeftToggle"))
+ hl.bind("SUPER + N", hl.dsp.global("quickshell:sidebarRightToggle"), { description = "Shell: Toggle right sidebar" })
+ hl.bind("SUPER + Slash", hl.dsp.global("quickshell:cheatsheetToggle"), { description = "Shell: Toggle cheatsheet" })
+ hl.bind("SUPER + K", hl.dsp.global("quickshell:oskToggle"), { description = "Shell: Toggle on-screen keyboard" })
+-hl.bind("SUPER + M", hl.dsp.global("quickshell:mediaControlsToggle"), { description = "Shell: Toggle media controls" })
++-- hl.bind("SUPER + M", hl.dsp.global("quickshell:mediaControlsToggle"), { description = "Shell: Toggle media controls" })
+ hl.bind("SUPER + G", hl.dsp.global("quickshell:overlayToggle"), { description = "Shell: Toggle widget overlay" })
+ hl.bind("CTRL + ALT + Delete", hl.dsp.global("quickshell:sessionToggle"), { description = "Shell: Toggle session menu" })
+-hl.bind("SUPER + J", hl.dsp.global("quickshell:barToggle"), { description = "Shell: Toggle bar" })
++-- hl.bind("SUPER + J", hl.dsp.global("quickshell:barToggle"), { description = "Shell: Toggle bar" })
+ hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(qsIsAlive .. " || pkill wlogout || wlogout -p layer-shell"))
+ hl.bind("SHIFT + SUPER + ALT + Slash", hl.dsp.exec_cmd("qs -p $HOME/.config/quickshell/$qsConfig/welcome.qml"))
+ 
+@@ -46,16 +46,16 @@
+ hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"),
+     { locked = true, repeating = true })
+ 
+-hl.bind("CTRL + SUPER + T", hl.dsp.global("quickshell:wallpaperSelectorToggle"),
+-    { description = "Shell: Change wallpaper" })
+-hl.bind("CTRL + SUPER + ALT + T", hl.dsp.global("quickshell:wallpaperSelectorRandom"),
+-    { description = "Shell: Random wallpaper" })
+-hl.bind("CTRL + SUPER + SHIFT + D", hl.dsp.global("quickshell:toggleLightDark"),
+-    { description = "Shell: Toggle light/dark mode" })
+-hl.bind("CTRL + SUPER + T", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/colors/switchwall.sh"))
++-- hl.bind("CTRL + SUPER + T", hl.dsp.global("quickshell:wallpaperSelectorToggle"),
++--     { description = "Shell: Change wallpaper" })
++-- hl.bind("CTRL + SUPER + ALT + T", hl.dsp.global("quickshell:wallpaperSelectorRandom"),
++--     { description = "Shell: Random wallpaper" })
++-- hl.bind("CTRL + SUPER + SHIFT + D", hl.dsp.global("quickshell:toggleLightDark"),
++--     { description = "Shell: Toggle light/dark mode" })
++-- hl.bind("CTRL + SUPER + T", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/colors/switchwall.sh"))
+ hl.bind("CTRL + SUPER + R", hl.dsp.exec_cmd("killall ydotool qs quickshell; qs -c $qsConfig &"),
+     { description = "Shell: Restart widgets" })
+-hl.bind("CTRL + SUPER + P", hl.dsp.global("quickshell:panelFamilyCycle"), { description = "Shell: Cycle panel family" })
++-- hl.bind("CTRL + SUPER + P", hl.dsp.global("quickshell:panelFamilyCycle"), { description = "Shell: Cycle panel family" })
+ 
+ --##! Utilities
+ --# Screenshot, Record, OCR, Color picker, Clipboard history
+@@ -65,41 +65,41 @@
+ hl.bind("SUPER + Period", hl.dsp.exec_cmd(
+         qsIsAlive .. " || pkill fuzzel || " .. hyprScripts .. "/fuzzel-emoji.sh copy"),
+     { description = "Utilities: Emoji >> clipboard" })
+-hl.bind("SUPER + SHIFT + S", hl.dsp.global("quickshell:regionScreenshot"), { description = "Utilities: Screen snip" })
+-hl.bind("SUPER + SHIFT + S",
++hl.bind("CTRL + ALT + A", hl.dsp.global("quickshell:regionScreenshot"), { description = "Utilities: Screen snip" })
++hl.bind("CTRL + ALT+ A",
+     hl.dsp.exec_cmd(qsIsAlive .. " || pidof slurp || hyprshot --freeze --clipboard-only --mode region --silent"))
+-hl.bind("SUPER + SHIFT + A", hl.dsp.global("quickshell:regionSearch"), { description = "Utilities: Google Lens" })
+-hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd(qsIsAlive .. " || pidof slurp || " .. hyprScripts .. "/snip_to_search.sh"))
++-- hl.bind("SUPER + SHIFT + A", hl.dsp.global("quickshell:regionSearch"), { description = "Utilities: Google Lens" })
++-- hl.bind("SUPER + SHIFT + A", hl.dsp.exec_cmd(qsIsAlive .. " || pidof slurp || " .. hyprScripts .. "/snip_to_search.sh"))
+ --# OCR
+-hl.bind("SUPER + SHIFT + X", hl.dsp.global("quickshell:regionOcr"),
+-    { description = "Utilities: Character recognition >> clipboard" })
+-hl.bind("SUPER + SHIFT + T", hl.dsp.global("quickshell:screenTranslate"),
+-    { description = "Utilities: Translate screen content" })
+-hl.bind("SUPER + SHIFT + X", hl.dsp.exec_cmd(
+-    qsIsAlive ..
+-    " || pidof slurp || grim -g \"$(slurp $SLURP_ARGS)\" \"/tmp/ocr_image.png\" && tesseract \"/tmp/ocr_image.png\" stdout -l $(tesseract --list-langs | awk 'NR>1{print $1}' | tr '\\\\n' '+' | sed 's/\\\\+$/\\\\n/') | wl-copy && rm \"/tmp/ocr_image.png\""
+-))
++-- hl.bind("SUPER + SHIFT + X", hl.dsp.global("quickshell:regionOcr"),
++--     { description = "Utilities: Character recognition >> clipboard" })
++-- hl.bind("SUPER + SHIFT + T", hl.dsp.global("quickshell:screenTranslate"),
++--     { description = "Utilities: Translate screen content" })
++-- hl.bind("SUPER + SHIFT + X", hl.dsp.exec_cmd(
++--     qsIsAlive ..
++--     " || pidof slurp || grim -g \"$(slurp $SLURP_ARGS)\" \"/tmp/ocr_image.png\" && tesseract \"/tmp/ocr_image.png\" stdout -l $(tesseract --list-langs | awk 'NR>1{print $1}' | tr '\\\\n' '+' | sed 's/\\\\+$/\\\\n/') | wl-copy && rm \"/tmp/ocr_image.png\""
++-- ))
+ --# Color picker
+-hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"),
+-    { description = "Utilities: Pick color #RRGGBB >> clipboard" })
++-- hl.bind("SUPER + SHIFT + C", hl.dsp.exec_cmd("hyprpicker -a"),
++--     { description = "Utilities: Pick color #RRGGBB >> clipboard" })
+ --# Recording stuff
+-hl.bind("SUPER + SHIFT + R", hl.dsp.global("quickshell:regionRecord"),
+-    { locked = true, description = "Utilities: Record region (no sound)" })
+-hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/videos/record.sh"), { locked = true })
+-hl.bind("SUPER + ALT + R", hl.dsp.global("quickshell:regionRecord"), { locked = true })
+-hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/videos/record.sh"), { locked = true })
+-hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen"), { locked = true })
+-hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen --sound"),
+-    { locked = true, description = "Utilities: Record screen (with sound)" })
++-- hl.bind("SUPER + SHIFT + R", hl.dsp.global("quickshell:regionRecord"),
++--     { locked = true, description = "Utilities: Record region (no sound)" })
++-- hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/videos/record.sh"), { locked = true })
++-- hl.bind("SUPER + ALT + R", hl.dsp.global("quickshell:regionRecord"), { locked = true })
++-- hl.bind("SUPER + ALT + R", hl.dsp.exec_cmd(qsIsAlive .. " || " .. qsScripts .. "/videos/record.sh"), { locked = true })
++-- hl.bind("CTRL + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen"), { locked = true })
++-- hl.bind("SUPER + SHIFT + ALT + R", hl.dsp.exec_cmd(qsScripts .. "/videos/record.sh --fullscreen --sound"),
++--     { locked = true, description = "Utilities: Record screen (with sound)" })
+ --# Fullscreen screenshot
+ local grimhyprctl = "grim -o \"$(hyprctl activeworkspace -j | jq -r '.monitor')\""
+ hl.bind("Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"),
+     { locked = true, description = "Utilities: Screenshot >> clipboard" })
+-hl.bind("CTRL + Print", hl.dsp.exec_cmd(
+-    "mkdir -p $(xdg-user-dir PICTURES)/Screenshots && " ..
+-    grimhyprctl .. " $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"
+-), { locked = true, non_consuming = true, description = "Utilities: Screenshot >> clipboard & file" })
+-hl.bind("CTRL + Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"), { locked = true, non_consuming = true })
++-- hl.bind("CTRL + Print", hl.dsp.exec_cmd(
++--     "mkdir -p $(xdg-user-dir PICTURES)/Screenshots && " ..
++--     grimhyprctl .. " $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"
++-- ), { locked = true, non_consuming = true, description = "Utilities: Screenshot >> clipboard & file" })
++-- hl.bind("CTRL + Print", hl.dsp.exec_cmd(grimhyprctl .. " - | wl-copy"), { locked = true, non_consuming = true })
+ --# AI
+ hl.bind("SUPER + SHIFT + ALT + mouse:273", hl.dsp.exec_cmd(hyprScripts .. "/ai/primary-buffer-query.sh"),
+     { description = "Utilities: Generate AI summary for selected text" })
+@@ -186,7 +186,7 @@
+ hl.bind("SUPER + Semicolon", hl.dsp.layout("splitratio -0.1"), { repeating = true })
+ hl.bind("SUPER + Apostrophe", hl.dsp.layout("splitratio +0.1"), { repeating = true })
+ --# Positioning mode
+-hl.bind("SUPER + ALT + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Window: Float/Tile" })
++hl.bind("SUPER + Space", hl.dsp.window.float({ action = "toggle" }), { description = "Window: Float/Tile" })
+ hl.bind("SUPER + D", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }),
+     { description = "Window: Maximize" })
+ hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }),
+@@ -333,8 +333,8 @@
+ 
+ --##! Session
+ hl.bind("SUPER + L", hl.dsp.exec_cmd("loginctl lock-session"), { description = "Session: Lock" })
+-hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("systemctl suspend || loginctl suspend"),
+-    { locked = true, description = "Session: Sleep" }) -- Sleep
++-- hl.bind("SUPER + SHIFT + L", hl.dsp.exec_cmd("systemctl suspend || loginctl suspend"),
++--     { locked = true, description = "Session: Sleep" }) -- Sleep
+ -- hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("systemctl suspend || loginctl suspend"), {locked = true} ) -- # [hidden] Suspend when laptop lid is closed, uncomment if for whatever reason it's not the default behavior
+ 
+ hl.bind("CTRL + SHIFT + ALT + SUPER + Delete", hl.dsp.exec_cmd("systemctl poweroff || loginctl poweroff"),
+--- a/quickshell/ii/modules/ii/bar/BarContent.qml
++++ b/quickshell/ii/modules/ii/bar/BarContent.qml
+@@ -82,18 +82,12 @@
+             anchors.fill: parent
+             spacing: 0
+ 
+-            LeftSidebarButton { // Left sidebar button
+-                id: leftSidebarButton
+-                Layout.alignment: Qt.AlignVCenter
+-                Layout.leftMargin: Appearance.rounding.screenRounding
+-                colBackground: barLeftSideMouseArea.hovered ? Appearance.colors.colLayer1Hover : ColorUtils.transparentize(Appearance.colors.colLayer1Hover, 1)
+-            }
+-
+             ActiveWindow {
+-                Layout.leftMargin: 10 + (leftSidebarButton.visible ? 0 : Appearance.rounding.screenRounding)
++                Layout.leftMargin: 10 + Appearance.rounding.screenRounding
+                 Layout.rightMargin: Appearance.rounding.screenRounding
+                 Layout.fillWidth: true
+                 Layout.fillHeight: true
++                Layout.maximumWidth: 350
+                 visible: root.useShortenedForm === 0
+             }
+         }
+@@ -105,20 +99,27 @@
+             top: parent.top
+             bottom: parent.bottom
+             horizontalCenter: parent.horizontalCenter
++            horizontalCenterOffset: (rightCenterGroup.width - leftCenterGroup.width) / 2
+         }
+         spacing: 4
+ 
+         BarGroup {
+             id: leftCenterGroup
++            readonly property real mediaSpace: Config.options.bar.verbose && root.useShortenedForm === 0 ? 280 : 36
+             anchors.verticalCenter: parent.verticalCenter
+-            implicitWidth: root.centerSideModuleWidth
++            implicitWidth: root.useShortenedForm === 2 ? root.centerSideModuleWidth
++                : Math.max(root.centerSideModuleWidth,
++                    Math.min(resourceMonitor.implicitWidth + mediaSpace, root.width * 0.28))
+ 
+             Resources {
+-                alwaysShowAllResources: root.useShortenedForm === 2
++                id: resourceMonitor
+                 Layout.fillWidth: root.useShortenedForm === 2
++                Layout.minimumWidth: Math.min(implicitWidth, Layout.maximumWidth)
++                Layout.maximumWidth: leftCenterGroup.width - (root.useShortenedForm === 2 ? 10 : 36)
+             }
+ 
+             Media {
++                clip: true
+                 visible: root.useShortenedForm < 2
+                 Layout.fillWidth: true
+             }
+--- a/quickshell/ii/modules/ii/bar/Media.qml
++++ b/quickshell/ii/modules/ii/bar/Media.qml
+@@ -74,7 +74,6 @@
+ 
+         StyledText {
+             visible: Config.options.bar.verbose
+-            width: rowLayout.width - (CircularProgress.size + rowLayout.spacing * 2)
+             Layout.alignment: Qt.AlignVCenter
+             Layout.fillWidth: true // Ensures the text takes up available space
+             Layout.rightMargin: rowLayout.spacing
+--- a/quickshell/ii/modules/ii/bar/Resource.qml
++++ b/quickshell/ii/modules/ii/bar/Resource.qml
+@@ -3,90 +3,60 @@
+ import QtQuick
+ import QtQuick.Layouts
+ 
+-Item {
++RowLayout {
+     id: root
+     required property string iconName
+-    required property double percentage
+-    property int warningThreshold: 100
+-    property bool shown: true
+-    clip: true
+-    visible: width > 0 && height > 0
+-    implicitWidth: resourceRowLayout.x < 0 ? 0 : resourceRowLayout.implicitWidth
+-    implicitHeight: Appearance.sizes.barHeight
+-    property bool warning: percentage * 100 >= warningThreshold
+-
+-    RowLayout {
+-        id: resourceRowLayout
+-        spacing: 2
+-        x: shown ? 0 : -resourceRowLayout.width
+-        anchors {
+-            verticalCenter: parent.verticalCenter
+-        }
+-
+-        ClippedFilledCircularProgress {
+-            id: resourceCircProg
+-            Layout.alignment: Qt.AlignVCenter
+-            lineWidth: Appearance.rounding.unsharpen
+-            value: percentage
+-            implicitSize: 20
+-            colPrimary: root.warning ? Appearance.colors.colError : Appearance.colors.colOnSecondaryContainer
+-            accountForLightBleeding: !root.warning
+-            enableAnimation: false
+-
+-            Item {
+-                anchors.centerIn: parent
+-                width: resourceCircProg.implicitSize
+-                height: resourceCircProg.implicitSize
+-                
+-                MaterialSymbol {
+-                    anchors.centerIn: parent
+-                    font.weight: Font.DemiBold
+-                    fill: 1
+-                    text: iconName
+-                    iconSize: Appearance.font.pixelSize.normal
+-                    color: Appearance.m3colors.m3onSecondaryContainer
+-                }
+-            }
+-        }
++    required property real value
++    required property int warningThreshold
++    property string suffix: "%"
++    readonly property bool available: Number.isFinite(value)
++    readonly property bool warning: available && value >= warningThreshold
++
++    spacing: 2
++
++    ClippedFilledCircularProgress {
++        id: resourceCircProg
++        Layout.alignment: Qt.AlignVCenter
++        lineWidth: Appearance.rounding.unsharpen
++        value: root.available ? Math.min(1, Math.max(0, root.value / 100)) : 0
++        implicitSize: 20
++        colPrimary: root.warning ? Appearance.colors.colError : Appearance.colors.colOnSecondaryContainer
++        accountForLightBleeding: !root.warning
++        enableAnimation: false
+ 
+         Item {
+-            Layout.alignment: Qt.AlignVCenter
+-            implicitWidth: fullPercentageTextMetrics.width
+-            implicitHeight: percentageText.implicitHeight
+-
+-            TextMetrics {
+-                id: fullPercentageTextMetrics
+-                text: "100"
+-                font.pixelSize: Appearance.font.pixelSize.small
+-            }
++            anchors.centerIn: parent
++            width: resourceCircProg.implicitSize
++            height: resourceCircProg.implicitSize
+ 
+-            StyledText {
+-                id: percentageText
++            MaterialSymbol {
+                 anchors.centerIn: parent
+-                color: Appearance.colors.colOnLayer1
+-                font.pixelSize: Appearance.font.pixelSize.small
+-                text: `${Math.round(percentage * 100).toString()}`
++                font.weight: Font.DemiBold
++                fill: 1
++                text: root.iconName
++                iconSize: Appearance.font.pixelSize.normal
++                color: Appearance.m3colors.m3onSecondaryContainer
+             }
+         }
+-
+-        Behavior on x {
+-            animation: Appearance.animation.elementMove.numberAnimation.createObject(this)
+-        }
+     }
+ 
+-    MouseArea {
+-        id: mouseArea
+-        anchors.fill: parent
+-        hoverEnabled: true
+-        acceptedButtons: Qt.NoButton
+-        enabled: resourceRowLayout.x >= 0 && root.width > 0 && root.visible
+-    }
++    Item {
++        Layout.alignment: Qt.AlignVCenter
++        implicitWidth: Math.max(maxValueMetrics.advanceWidth, valueText.implicitWidth)
++        implicitHeight: valueText.implicitHeight
++
++        TextMetrics {
++            id: maxValueMetrics
++            text: `100${root.suffix}`
++            font: valueText.font
++        }
+ 
+-    Behavior on implicitWidth {
+-        NumberAnimation {
+-            duration: Appearance.animation.elementMove.duration
+-            easing.type: Appearance.animation.elementMove.type
+-            easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
++        StyledText {
++            id: valueText
++            anchors.centerIn: parent
++            color: root.warning ? Appearance.colors.colError : Appearance.colors.colOnLayer1
++            font.pixelSize: Appearance.font.pixelSize.small
++            text: root.available ? `${Math.trunc(root.value)}${root.suffix}` : "—"
+         }
+     }
+ }
+--- a/quickshell/ii/modules/ii/bar/Resources.qml
++++ b/quickshell/ii/modules/ii/bar/Resources.qml
+@@ -6,48 +6,44 @@
+ MouseArea {
+     id: root
+     property bool borderless: Config.options.bar.borderless
+-    property bool alwaysShowAllResources: false
+-    implicitWidth: rowLayout.implicitWidth + rowLayout.anchors.leftMargin + rowLayout.anchors.rightMargin
++    readonly property real sideMargin: 4
++    readonly property int warningThreshold: 75
++    implicitWidth: rowLayout.implicitWidth + sideMargin * 2
+     implicitHeight: Appearance.sizes.barHeight
+     hoverEnabled: !Config.options.bar.tooltips.clickToShow
+ 
+     RowLayout {
+         id: rowLayout
+-
+-        spacing: 0
+-        anchors.fill: parent
+-        anchors.leftMargin: 4
+-        anchors.rightMargin: 4
++        x: root.sideMargin
++        anchors.verticalCenter: parent.verticalCenter
++        width: implicitWidth
++        transformOrigin: Item.Left
++        scale: Math.min(1, Math.max(0, root.width - root.sideMargin * 2) / Math.max(1, implicitWidth))
++        spacing: 4
+ 
+         Resource {
+-            iconName: "memory"
+-            percentage: ResourceUsage.memoryUsedPercentage
+-            warningThreshold: Config.options.bar.resources.memoryWarningThreshold
++            iconName: "earthquake"
++            value: ResourceUsage.cpuUsage * 100
++            warningThreshold: root.warningThreshold
+         }
+ 
+         Resource {
+-            iconName: "swap_horiz"
+-            percentage: ResourceUsage.swapUsedPercentage
+-            shown: (Config.options.bar.resources.alwaysShowSwap && percentage > 0) || 
+-                (MprisController.activePlayer?.trackTitle == null) ||
+-                root.alwaysShowAllResources
+-            Layout.leftMargin: shown ? 6 : 0
+-            warningThreshold: Config.options.bar.resources.swapWarningThreshold
++            iconName: "display_settings"
++            value: ResourceUsage.gpuUsage * 100
++            warningThreshold: root.warningThreshold
+         }
+ 
++
+         Resource {
+-            iconName: "planner_review"
+-            percentage: ResourceUsage.cpuUsage
+-            shown: Config.options.bar.resources.alwaysShowCpu || 
+-                !(MprisController.activePlayer?.trackTitle?.length > 0) ||
+-                root.alwaysShowAllResources
+-            Layout.leftMargin: shown ? 6 : 0
+-            warningThreshold: Config.options.bar.resources.cpuWarningThreshold
++            iconName: "memory"
++            value: ResourceUsage.memoryUsedPercentage * 100
++            warningThreshold: root.warningThreshold
+         }
+-
+     }
+ 
+     ResourcesPopup {
+         hoverTarget: root
++        showHardwareDetails: true
++        warningThreshold: root.warningThreshold
+     }
+ }
+--- a/quickshell/ii/modules/ii/bar/ResourcesPopup.qml
++++ b/quickshell/ii/modules/ii/bar/ResourcesPopup.qml
+@@ -6,12 +6,28 @@
+ 
+ StyledPopup {
+     id: root
++    property bool showHardwareDetails: false
++    property int warningThreshold: 75
+ 
+     // Helper function to format KB to GB
+     function formatKB(kb) {
+         return (kb / (1024 * 1024)).toFixed(1) + " GB";
+     }
+ 
++    function formatReading(value, suffix) {
++        const displayValue = showHardwareDetails ? Math.trunc(value) : Math.round(value);
++        return Number.isFinite(value) ? `${displayValue}${suffix}` : "—";
++    }
++
++    function formatUsed(kb, percent) {
++        const amount = formatKB(kb);
++        return showHardwareDetails ? `${amount} · ${formatReading(percent, "%")}` : amount;
++    }
++
++    function warns(value) {
++        return showHardwareDetails && Number.isFinite(value) && value >= warningThreshold;
++    }
++
+     Row {
+         anchors.centerIn: parent
+         spacing: 12
+@@ -29,7 +45,8 @@
+                 StyledPopupValueRow {
+                     icon: "clock_loader_60"
+                     label: Translation.tr("Used:")
+-                    value: root.formatKB(ResourceUsage.memoryUsed)
++                    value: root.formatUsed(ResourceUsage.memoryUsed, ResourceUsage.memoryUsedPercentage * 100)
++                    warning: root.warns(ResourceUsage.memoryUsedPercentage * 100)
+                 }
+                 StyledPopupValueRow {
+                     icon: "check_circle"
+@@ -45,7 +62,7 @@
+         }
+ 
+         Column {
+-            visible: ResourceUsage.swapTotal > 0
++            visible: root.showHardwareDetails || ResourceUsage.swapTotal > 0
+             anchors.top: parent.top
+             spacing: 8
+ 
+@@ -58,7 +75,8 @@
+                 StyledPopupValueRow {
+                     icon: "clock_loader_60"
+                     label: Translation.tr("Used:")
+-                    value: root.formatKB(ResourceUsage.swapUsed)
++                    value: root.formatUsed(ResourceUsage.swapUsed, ResourceUsage.swapUsedPercentage * 100)
++                    warning: root.warns(ResourceUsage.swapUsedPercentage * 100)
+                 }
+                 StyledPopupValueRow {
+                     icon: "check_circle"
+@@ -78,7 +96,7 @@
+             spacing: 8
+ 
+             StyledPopupHeaderRow {
+-                icon: "planner_review"
++                icon: root.showHardwareDetails ? "earthquake" : "planner_review"
+                 label: "CPU"
+             }
+             Column {
+@@ -86,7 +104,41 @@
+                 StyledPopupValueRow {
+                     icon: "bolt"
+                     label: Translation.tr("Load:")
+-                    value: `${Math.round(ResourceUsage.cpuUsage * 100)}%`
++                    value: root.formatReading(ResourceUsage.cpuUsage * 100, "%")
++                    warning: root.warns(ResourceUsage.cpuUsage * 100)
++                }
++                StyledPopupValueRow {
++                    visible: root.showHardwareDetails
++                    icon: "device_thermostat"
++                    label: Translation.tr("Temperature:")
++                    value: root.formatReading(ResourceUsage.cpuTemperature, " °C")
++                    warning: root.warns(ResourceUsage.cpuTemperature)
++                }
++            }
++        }
++
++        Column {
++            visible: root.showHardwareDetails
++            anchors.top: parent.top
++            spacing: 8
++
++            StyledPopupHeaderRow {
++                icon: "display_settings"
++                label: "GPU"
++            }
++            Column {
++                spacing: 4
++                StyledPopupValueRow {
++                    icon: "bolt"
++                    label: Translation.tr("Load:")
++                    value: root.formatReading(ResourceUsage.gpuUsage * 100, "%")
++                    warning: root.warns(ResourceUsage.gpuUsage * 100)
++                }
++                StyledPopupValueRow {
++                    icon: "thermostat"
++                    label: Translation.tr("Temperature:")
++                    value: root.formatReading(ResourceUsage.gpuTemperature, " °C")
++                    warning: root.warns(ResourceUsage.gpuTemperature)
+                 }
+             }
+         }
+--- a/quickshell/ii/modules/ii/bar/StyledPopupValueRow.qml
++++ b/quickshell/ii/modules/ii/bar/StyledPopupValueRow.qml
+@@ -8,6 +8,7 @@
+     required property string icon
+     required property string label
+     required property string value
++    property bool warning: false
+     spacing: 4
+ 
+     MaterialSymbol {
+@@ -23,7 +24,7 @@
+         Layout.fillWidth: true
+         horizontalAlignment: Text.AlignRight
+         visible: root.value !== ""
+-        color: Appearance.colors.colOnSurfaceVariant
++        color: root.warning ? Appearance.colors.colError : Appearance.colors.colOnSurfaceVariant
+         text: root.value
+     }
+ }
+--- a/quickshell/ii/services/ResourceUsage.qml
++++ b/quickshell/ii/services/ResourceUsage.qml
+@@ -21,6 +21,9 @@
+     property real swapUsedPercentage: swapTotal > 0 ? (swapUsed / swapTotal) : 0
+     property real cpuUsage: 0
+     property var previousCpuStats
++    property real cpuTemperature: NaN
++    property real gpuUsage: NaN
++    property real gpuTemperature: NaN
+ 
+     property string maxAvailableMemoryString: kbToGbString(ResourceUsage.memoryTotal)
+     property string maxAvailableSwapString: kbToGbString(ResourceUsage.swapTotal)
+@@ -93,6 +96,8 @@
+             }
+ 
+             root.updateHistories()
++            cpuTemperatureProbe.running = true
++            gpuProbe.running = true
+             interval = Config.options?.resources?.updateInterval ?? 3000
+         }
+ 	}
+@@ -101,6 +106,49 @@
+     FileView { id: fileStat; path: "/proc/stat" }
+ 
+     Process {
++        id: cpuTemperatureProbe
++        command: ["sensors", "-j", "coretemp-*"]
++        environment: ({ LC_ALL: "C" })
++        stdout: StdioCollector {
++            onStreamFinished: {
++                let temperatures = [];
++                try {
++                    for (const chip of Object.values(JSON.parse(text))) {
++                        for (const [label, readings] of Object.entries(chip)) {
++                            if (label.startsWith("Package id ")) {
++                                temperatures.push(...Object.entries(readings)
++                                    .filter(([key, value]) => /^temp\d+_input$/.test(key) && Number.isFinite(value))
++                                    .map(([, value]) => value));
++                            }
++                        }
++                    }
++                } catch (error) {
++                    temperatures = [];
++                }
++                root.cpuTemperature = temperatures.length ? Math.max(...temperatures) : NaN;
++            }
++        }
++    }
++
++    Process {
++        id: gpuProbe
++        command: ["nvtop", "--snapshot", "--no-processes", "--delay", "5"]
++        environment: ({ LC_ALL: "C" })
++        stdout: StdioCollector {
++            onStreamFinished: {
++                let gpu;
++                try {
++                    gpu = JSON.parse(text)[0];
++                } catch (error) {
++                    gpu = undefined;
++                }
++                root.gpuUsage = parseFloat(gpu?.gpu_util) / 100;
++                root.gpuTemperature = parseFloat(gpu?.temp);
++            }
++        }
++    }
++
++    Process {
+         id: findCpuMaxFreqProc
+         environment: ({
+             LANG: "C",
+--- a/quickshell/ii/translations/zh_CN.json
++++ b/quickshell/ii/translations/zh_CN.json
+@@ -92,6 +92,7 @@
+   "Task description": "任务描述",
+   "Temperature must be between 0 and 2": "温度必须在 0 到 2 之间",
+   "Temperature set to %1": "温度已设置为 %1",
++  "Temperature:": "温度：",
+   "Temperature: %1": "温度：%1",
+   "The hentai one | Great quantity, a lot of NSFW, quality varies wildly": "成人向 | 数量巨大，大量 NSFW，质量参差不齐",
+   "The popular one | Best quantity, but quality can vary wildly": "最受欢迎 | 数量最多，但质量参差不齐",
+@@ -721,4 +722,4 @@
+   "Pin to Start": "固定到“开始”屏幕",
+   "Pin": "固定",
+   "Unpin": "取消固定"
+-}
+\ No newline at end of file
++}

@@ -1,12 +1,13 @@
 # Design My Hyprland
 
-Arch Linux 上的 Hyprland + end_4 Illogical Impulse 个人配置。主要改动包括 Magic Trackpad 手感、四指切桌面与搜索、Fcitx5 中文输入，以及将壁纸配色同步给 KDE 应用。
+Arch Linux 上的 Hyprland + end_4 Illogical Impulse 个人配置，包含 Magic Trackpad 手感、四指手势、Quickshell 顶栏布局与硬件读数、Fcitx5 中文输入，以及 KDE 壁纸配色同步。
 
 ## 版本与依赖
 
 配置取自 Hyprland **0.57.2**、libinput **1.32.0**、Matugen **4.2.0** 和 Plasma **6.8.3**。先安装带 Quickshell 的 [end_4 Illogical Impulse](https://ii.clsty.link/en/ii-qs/01setup/)，对应的 [上游提交是 `21733c3`](https://github.com/end-4/dots-hyprland/tree/21733c3ca7f4edc20faafedea844dc96002c6f7f)。
 
-- 输入与快捷键使用 Fcitx5、Kitty、Dolphin。Fuzzel 为搜索键的备用启动器。
+- 输入与快捷键使用 Fcitx5、Kitty、Dolphin 和 Hyprlock。Fuzzel 为搜索键的备用启动器。
+- 顶栏硬件读数使用 `lm_sensors` 的 `sensors` 和 `nvtop`。CPU 温度读取 Intel `coretemp` 的封装温度，GPU 使用 `nvtop` 列出的第一块卡。
 - 配色使用 Matugen、Python 3、systemd 用户服务、`kreadconfig6`、`kwriteconfig6` 和 `plasma-apply-colorscheme`。GTK 设置使用 Breeze 光标、Fluent 图标与 MiSans 字体，按需安装。
 - ChatGPT 桌面入口适用于可执行文件位于 `/usr/bin/chatgpt` 的安装。
 
@@ -20,13 +21,18 @@ data_dir=${XDG_DATA_HOME:-$HOME/.local/share}
 install -d "$config_dir" "$data_dir/color-schemes"
 cp -a --backup=numbered config/. "$config_dir/"
 cp --backup=numbered data/color-schemes/*.colors "$data_dir/color-schemes/"
-git -C "$config_dir" apply --check "$PWD/patches/end4-switchwall.patch"
-git -C "$config_dir" apply "$PWD/patches/end4-switchwall.patch"
+for patch in "$PWD"/patches/end4-{switchwall,shell}.patch; do
+  if git -C "$config_dir" apply --reverse --check "$patch" 2>/dev/null; then
+    continue
+  fi
+  git -C "$config_dir" apply --check "$patch" &&
+    git -C "$config_dir" apply "$patch" || break
+done
 ```
 
-`config/hypr/custom/` 由 end_4 的 `hyprland.lua` 加载。壁纸脚本补丁保留 GNOME 的明暗偏好切换，去掉自动替换 GTK 主题和自动改写 VS Code 配色的调用。升级 end_4 后，检查配置目录中的脚本是否需要重新应用补丁。
+`config/hypr/custom/` 由 end_4 的 `hyprland.lua` 加载。[壁纸补丁](patches/end4-switchwall.patch)保留 GNOME 的明暗偏好切换，移除了自动替换 GTK 主题和改写 VS Code 配色的调用。[桌面补丁](patches/end4-shell.patch)包含 Quickshell 顶栏、资源弹窗、简体中文翻译和 end_4 快捷键调整。升级 end_4 后，先用 `git apply --check` 检查补丁兼容性。
 
-如需同步完整的 Quickshell 个性化设置，以下命令将模板中的壁纸和录屏目录替换为当前账号的路径。把最后一个参数 `""` 改为本机壁纸的绝对路径，或稍后用 `Ctrl+Super+T` 选择。
+如需同步完整的 Quickshell 个性化设置，以下命令将模板中的壁纸和录屏目录替换为当前账号的路径。把最后一个参数 `""` 改为本机壁纸的绝对路径，或稍后运行 `qs -c ii ipc call wallpaperSelector toggle` 选择。
 
 ```bash
 python3 - "$config_dir/illogical-impulse/config.json.in" "$config_dir/illogical-impulse/config.json" "" <<'PY'
@@ -45,7 +51,15 @@ target.write_text(json.dumps(settings, ensure_ascii=False, indent=4) + "\n", enc
 PY
 ```
 
-重载 Hyprland 后用 `hyprctl configerrors` 检查 Lua。环境变量与 Fcitx5 启动项在重新登录后加载。
+重载 Hyprland 后用 `hyprctl configerrors` 检查 Lua，用 `qs -c ii log` 查看 Quickshell 日志。重新登录会加载输入法环境，并从 Hyprland 的启动钩子启动 Hyprlock 和 Fcitx5。
+
+## Quickshell 顶栏与组件宽度
+
+桌面补丁将活动窗口标题宽度上限设为 **350 个逻辑像素**，并按左右模块宽度补偿中心偏移。标准布局为详细媒体区预留 280 个逻辑像素，紧凑布局预留 36 个。资源和媒体所在的左侧组以栏宽的 28% 为上限计算扩展空间，再应用基础宽度下限。资源项按可用宽度缩放，长媒体标题由布局约束。
+
+资源区常驻 CPU、GPU、内存百分比。详情弹窗显示 CPU 与 GPU 温度及内存和交换空间用量，达到 **75%** 或 **75 °C** 时使用警示色。缺少的 CPU 或 GPU 传感器读数显示为 `—`。展开与紧凑布局的宽度逻辑位于补丁中的 `BarContent.qml`。
+
+Quickshell 的 JSON 模板保存了工具按钮、天气小部件位置、工作区编号延时 **200 ms** 和夜间色温 **5810 K**。顶栏工具按钮提供取色和录屏入口。
 
 ## 触摸板、鼠标和快捷键
 
@@ -56,7 +70,9 @@ PY
 | 四指横扫 | 松手后切到相邻工作区，走与 `Ctrl+Super+←/→` 相同的完整动画。横向净位移达到 `commit_distance = 180` 才切换。 |
 | 四指向内捏合 | 打开 Quickshell 应用搜索。 |
 | 四指上下滑动 | 使用 end_4 的工作区总览。 |
-| `Super+Space` | 打开或关闭搜索。 |
+| `Super+Alt+Space` | 打开或关闭搜索。 |
+| `Super+Space` | 切换活动窗口的浮动或平铺状态。 |
+| `Ctrl+Alt+A` | 区域截图。 |
 | `Super+Shift+1…0` | 将窗口移到对应编号的工作区。 |
 
 手势注册作用于 Hyprland 会话中的触摸板。调完设备倍率或横扫阈值，可用 `hyprctl reload config-only` 立即重载。
@@ -90,4 +106,4 @@ sed "s|@CHATGPT_WRAPPER@|$HOME/.local/bin/chatgpt-hyprland|" \
 
 ## 上游来源
 
-Matugen 配置和壁纸脚本补丁来自 [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/tree/21733c3ca7f4edc20faafedea844dc96002c6f7f) 的本地修改，适用其 [GPL-3.0 许可](LICENSES.end-4.GPL-3.0.txt)。
+Matugen 配置和两份桌面补丁以 [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland/tree/21733c3ca7f4edc20faafedea844dc96002c6f7f) 为基础，适用其 [GPL-3.0 许可](LICENSES.end-4.GPL-3.0.txt)。
