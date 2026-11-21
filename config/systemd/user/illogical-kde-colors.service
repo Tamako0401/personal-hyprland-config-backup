@@ -1,0 +1,7 @@
+[Unit]
+Description=Apply Illogical Impulse colors to KDE and KWin
+
+[Service]
+Type=oneshot
+Environment=QT_QPA_PLATFORM=offscreen
+ExecStart=/usr/bin/python3 "%E/illogical-impulse/sync-kde-colors.py"

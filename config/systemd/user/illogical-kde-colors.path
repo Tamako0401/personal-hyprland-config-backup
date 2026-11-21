@@ -1,0 +1,8 @@
+[Unit]
+Description=Watch Illogical Impulse color generation
+
+[Path]
+PathChanged=%S/quickshell/user/generated/colors.json
+
+[Install]
+WantedBy=default.target

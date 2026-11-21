@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "${XDG_CURRENT_DESKTOP:-}" = Hyprland ] && [ -n "${WAYLAND_DISPLAY:-}" ]; then
+    exec env -u GTK_IM_MODULE /usr/bin/chatgpt --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3 "$@"
+fi
+
+exec /usr/bin/chatgpt "$@"
