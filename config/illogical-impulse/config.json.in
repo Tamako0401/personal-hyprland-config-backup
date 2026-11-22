@@ -463,7 +463,7 @@
         "theme": "freedesktop"
     },
     "time": {
-        "dateFormat": "ddd, dd/MM",
+        "dateFormat": "yyyy/MM/dd",
         "dateWithYearFormat": "dd/MM/yyyy",
         "format": "hh:mm",
         "pomodoro": {
